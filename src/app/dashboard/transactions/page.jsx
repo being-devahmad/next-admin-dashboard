@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import classes from './transactions.module.css'
+import classes from './page.module.css'
 
 const Transactions = () => {
     return (
