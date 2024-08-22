@@ -1,19 +1,18 @@
-// import Sidebar from "@/components/ui/sidebar/sidebar"
-// import Sidebar from "../ui/sidebar/sidebar"
-// import styles from '@/app/ui/dashboard/dashboard.module.css'
+import classes from '@/components/ui/dashboard/dashboard.module.css'
+import Navbar from '@/components/ui/Navbar/Navbar'
+import Sidebar from '@/components/ui/sidebar/sidebar'
+const layout = ({ children }) => {
+    return (
+        <div className={classes.container}>
+            <div className={classes.menu}>
+                <Sidebar />
+            </div>
+            <div className={classes.content}>
+                <Navbar />
+                {children}
+            </div>
+        </div>
+    )
+}
 
-// const Layout = ({ children }) => {
-//     return (
-//         <div className={styles.container}>
-//             <div className={styles.menu}>
-//                 <Sidebar />
-//             </div>
-//             <div className={styles.content}>
-//                 <Navbar />
-//                 {children}
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Layout
+export default layout

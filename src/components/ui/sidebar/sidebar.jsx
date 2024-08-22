@@ -29,7 +29,7 @@ const menuItems = [
                 icon: <MdShoppingBag />,
             },
             {
-                title: "Transictions",
+                title: "Transactions",
                 path: "/dashboard/transactions",
                 icon: <MdAttachMoney />
             },
@@ -49,10 +49,10 @@ const Sidebar = () => {
                     height={50} />
                 <div className={classes.userDetail}>
                     <span className={classes.username}>
-                        Hello
+                        Next Admin
                     </span>
                     <span className={classes.userTitle}>
-                        World
+                        Dashboard
                     </span>
                 </div>
             </div>

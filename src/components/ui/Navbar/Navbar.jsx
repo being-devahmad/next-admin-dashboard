@@ -1,7 +1,7 @@
 "use client"
 
 import { MdNotifications, MdOutlineChat, MdPublic, MdSearch } from "react-icons/md"
-import styles from '@/app/ui/navbar/navbar.module.css'
+import styles from './Navbar.module.css'
 import { usePathname } from "next/navigation"
 
 
