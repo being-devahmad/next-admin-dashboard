@@ -10,6 +10,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'www.befunky.com',
             },
+            {
+                protocol: 'https',
+                hostname: "static3.webx.pk"
+            }
         ],
     },
 };

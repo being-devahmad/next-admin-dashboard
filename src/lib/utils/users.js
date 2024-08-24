@@ -1,4 +1,4 @@
-// fetching data from database
+// fetching users from database
 
 import { dbConnext } from "../db/dbConnect"
 import { User } from "../models/userModel"
@@ -6,7 +6,7 @@ import { User } from "../models/userModel"
 export const fetchUsers = async () => {
     try {
         dbConnext()
-        const users = await User.find({})
+        const users = await User.find()
         return users
 
     } catch (error) {

@@ -1,7 +1,8 @@
 import Image from "next/image"
 import styles from './page.module.css'
 import Link from "next/link"
-import { fetchUsers } from "@/lib/utils/data"
+import { fetchUsers } from "@/lib/utils/users"
+import { deleteUser } from "@/lib/actions/user"
 
 
 const UserPage = async () => {
@@ -29,7 +30,7 @@ const UserPage = async () => {
         <tbody>
 
           {users.map((user) => {
-            const { id, username, email, img, address, phone, isAdmin, isActive , createdAt } = user
+            const { id, username, email, img, address, phone, isAdmin, isActive, createdAt } = user
             return (
               <>
                 <tr key={id} className={styles.tableRow}>
@@ -46,13 +47,13 @@ const UserPage = async () => {
                   <td>{email}</td>
                   <td>{createdAt ? createdAt?.toString().slice(4, 16) : ""}</td>
                   <td>{isAdmin ? "Admin" : "Not Admin"} </td>
-                  <td>{isActive ? "online" : "offline"}</td>
+                  <td>{isActive ? "Online" : "Offline"}</td>
                   <td className={styles.actions}>
                     <Link href={`/dashboard/users/${id}`}>
                       <button className={`${styles.button} ${styles.view}`}>View</button>
                     </Link>
-                    <form>
-                      <input type="hidden" name="id" />
+                    <form action={deleteUser}>
+                      <input type="hidden" name="id" value={id} />
                       <button className={`${styles.button} ${styles.delete}`}>Delete</button>
                     </form>
                   </td>
