@@ -7,6 +7,7 @@ import { fetchUsers } from "@/lib/utils/data"
 const UserPage = async () => {
 
   const users = await fetchUsers()
+  console.log('users-->>', users)
 
   return (
     <div className={styles.container}>
@@ -27,37 +28,43 @@ const UserPage = async () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.user}>
-                <Image src="/avatar.svg"
-                  width={40}
-                  height={40}
-                  className={styles.userImage} />
-                John Doe
-              </div>
 
-            </td>
-            <td>john@gmail.com</td>
-            <td>22.08.2024
-              {/* {user.createdAt?.toString().slice(4, 16)} */}
-            </td>
-            <td>Admin
-              {/* {user.isAdmin ? "Admin" : "Not Admin"} */}
-            </td>
-            <td>Online
-              {/* {user.isActive ? "online" : "offline"} */}
-            </td>
-            <td className={styles.actions}>
-              <Link href={`/dashboard/users/1`}>
-                <button className={`${styles.button} ${styles.view}`}>View</button>
-              </Link>
-              <form>
-                <input type="hidden" name="id" />
-                <button className={`${styles.button} ${styles.delete}`}>Delete</button>
-              </form>
-            </td>
-          </tr>
+          {users.map((user) => {
+            const { id, username, email, img, address, phone, isAdmin, isActive } = user
+            return (
+              <>
+                <tr key={id}>
+                  <td>
+                    <div className={styles.user}>
+                      <Image src={img}
+                        width={40}
+                        height={40}
+                        className={styles.userImage} />
+                      {username}
+                    </div>
+
+                  </td>
+                  <td>{email}</td>
+                  <td>22.08.2024
+                    {/* {createdAt?.toString().slice(4, 16)} */}
+                  </td>
+                  <td>{isAdmin ? "Admin" : "Not Admin"} </td>
+                  <td>{isActive ? "online" : "offline"}</td>
+                  <td className={styles.actions}>
+                    <Link href={`/dashboard/users/${id}`}>
+                      <button className={`${styles.button} ${styles.view}`}>View</button>
+                    </Link>
+                    <form>
+                      <input type="hidden" name="id" />
+                      <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              </>
+            )
+          })}
+
+
 
         </tbody>
       </table>
