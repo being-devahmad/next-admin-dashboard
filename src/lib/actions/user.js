@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt'
 import { redirect } from 'next/navigation';
 
 export const createUser = async (formData) => {
-    const { username, password, email, phone, isAdmin, isActive } = Object.fromEntries(formData)
+    const { id, username, password, email, phone, isAdmin, isActive } = Object.fromEntries(formData)
     try {
         dbConnext();
 
@@ -43,5 +43,39 @@ export const deleteUser = async (formData) => {
     }
 
     revalidatePath('/dashboard/users')
+
+}
+
+export const updateUser = async (formData) => {
+    const { id, username, password, email, phone, isAdmin, isActive } = Object.fromEntries(formData)
+
+    dbConnext()
+
+    try {
+
+        // password hashing
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+
+        const updateUserDetails = {
+            username, email, phone, isAdmin, isActive, password: hashedPassword
+        }
+
+        Object.keys(updateUserDetails).forEach((key) => {
+            if (updateUserDetails[key] === "" || updateUserDetails[key] === undefined) {
+                delete updateUserDetails[key];
+            }
+        });
+
+        await User.findByIdAndUpdate(id, updateUserDetails)
+
+    } catch (error) {
+        console.log(error)
+        throw new Error("Failed to update user")
+    }
+
+    revalidatePath('/dashboard/users')
+
+    redirect('/dashboard/users')
 
 }

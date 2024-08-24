@@ -34,9 +34,43 @@ export const deleteProduct = async (formData) => {
         dbConnext()
         await Product.findByIdAndDelete(id)
     } catch (error) {
-        console.log("Failed to delete" , error)
+        console.log("Failed to delete", error)
     }
 
     revalidatePath('/dashboard/products')
 
 }
+
+export const updateProduct = async (formData) => {
+    const { id, title, desc, price, img, stock, color, size } = Object.fromEntries(formData);
+    try {
+        dbConnext();
+
+        const updateProductDetails = {
+            title,
+            desc,
+            price,
+            img,
+            stock,
+            color,
+            size
+        };
+
+        // Remove any keys with empty string or undefined values
+        Object.keys(updateProductDetails).forEach((key) => {
+            if (updateProductDetails[key] === "" || updateProductDetails[key] === undefined) {
+                delete updateProductDetails[key];
+            }
+        });
+
+        // Update the product by its id
+        await Product.findByIdAndUpdate(id, updateProductDetails);
+
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to update product");
+    }
+
+    revalidatePath('/dashboard/products');
+    redirect('/dashboard/products');
+};
