@@ -33,7 +33,7 @@ const UserPage = async () => {
             const { id, username, email, img, address, phone, isAdmin, isActive } = user
             return (
               <>
-                <tr key={id}>
+                <tr key={id} className={styles.tableRow}>
                   <td>
                     <div className={styles.user}>
                       <Image src={img}

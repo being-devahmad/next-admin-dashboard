@@ -27,6 +27,7 @@
     padding: 10px;
 }
 
+
 .user {
     display: flex;
     align-items: center;
@@ -48,6 +49,8 @@
 
 .actions {
     display: flex;
+    align-items: center;
+    margin-top: 8px;
     gap: 10px;
 }
 
