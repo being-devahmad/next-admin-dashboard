@@ -29,41 +29,36 @@ const UserPage = async () => {
         </thead>
         <tbody>
 
-          {users.map((user) => {
+          {users.map((user, index) => {
             const { id, username, email, img, address, phone, isAdmin, isActive, createdAt } = user
             return (
-              <>
-                <tr key={id} className={styles.tableRow}>
-                  <td>
-                    <div className={styles.user}>
-                      <Image src={img}
-                        width={40}
-                        height={40}
-                        className={styles.userImage} />
-                      {username}
-                    </div>
+              <tr key={id || index}>
+                <td>
+                  <div className={styles.user}>
+                    <Image src={img}
+                      width={40}
+                      height={40}
+                      className={styles.userImage} />
+                    {username}
+                  </div>
 
-                  </td>
-                  <td>{email}</td>
-                  <td>{createdAt ? createdAt?.toString().slice(4, 16) : ""}</td>
-                  <td>{isAdmin ? "Admin" : "Not Admin"} </td>
-                  <td>{isActive ? "Online" : "Offline"}</td>
-                  <td className={styles.actions}>
-                    <Link href={`/dashboard/users/${id}`}>
-                      <button className={`${styles.button} ${styles.view}`}>View</button>
-                    </Link>
-                    <form action={deleteUser}>
-                      <input type="hidden" name="id" value={id} />
-                      <button className={`${styles.button} ${styles.delete}`}>Delete</button>
-                    </form>
-                  </td>
-                </tr>
-              </>
+                </td>
+                <td>{email}</td>
+                <td>{createdAt ? createdAt?.toString().slice(4, 16) : ""}</td>
+                <td>{isAdmin ? "Admin" : "Not Admin"} </td>
+                <td>{isActive ? "Online" : "Offline"}</td>
+                <td className={styles.actions}>
+                  <Link href={`/dashboard/users/${id}`}>
+                    <button className={`${styles.button} ${styles.view}`}>View</button>
+                  </Link>
+                  <form action={deleteUser}>
+                    <input type="hidden" name="id" value={id} />
+                    <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+                  </form>
+                </td>
+              </tr>
             )
           })}
-
-
-
         </tbody>
       </table>
     </div>
