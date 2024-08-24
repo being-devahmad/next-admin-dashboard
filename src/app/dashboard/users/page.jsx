@@ -1,9 +1,13 @@
 import Image from "next/image"
 import styles from './page.module.css'
 import Link from "next/link"
+import { fetchUsers } from "@/lib/utils/data"
 
 
-const UserPage = () => {
+const UserPage = async () => {
+
+  const users = await fetchUsers()
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -54,6 +58,7 @@ const UserPage = () => {
               </form>
             </td>
           </tr>
+
         </tbody>
       </table>
     </div>

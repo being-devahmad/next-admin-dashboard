@@ -1,8 +1,8 @@
 .container {
     background-color: var(--bgSec);
     padding: 20px;
-    margin-top: 20px;
     border-radius: 10px;
+    margin-top: 20px;
 }
 
 .top {
@@ -27,15 +27,15 @@
     padding: 10px;
 }
 
-.user {
+.product {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.userImage {
-    object-fit: cover;
+.productImage {
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .button {
