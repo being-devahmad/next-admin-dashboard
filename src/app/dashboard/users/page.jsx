@@ -7,7 +7,6 @@ import { fetchUsers } from "@/lib/utils/data"
 const UserPage = async () => {
 
   const users = await fetchUsers()
-  console.log('users-->>', users)
 
   return (
     <div className={styles.container}>
@@ -30,7 +29,7 @@ const UserPage = async () => {
         <tbody>
 
           {users.map((user) => {
-            const { id, username, email, img, address, phone, isAdmin, isActive } = user
+            const { id, username, email, img, address, phone, isAdmin, isActive , createdAt } = user
             return (
               <>
                 <tr key={id} className={styles.tableRow}>
@@ -45,9 +44,7 @@ const UserPage = async () => {
 
                   </td>
                   <td>{email}</td>
-                  <td>22.08.2024
-                    {/* {createdAt?.toString().slice(4, 16)} */}
-                  </td>
+                  <td>{createdAt ? createdAt?.toString().slice(4, 16) : ""}</td>
                   <td>{isAdmin ? "Admin" : "Not Admin"} </td>
                   <td>{isActive ? "online" : "offline"}</td>
                   <td className={styles.actions}>
