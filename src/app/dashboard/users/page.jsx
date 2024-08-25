@@ -4,6 +4,11 @@ import Link from "next/link"
 import { fetchUsers } from "@/lib/utils/users"
 import { deleteUser } from "@/lib/actions/user"
 
+export const metadata = {
+  title: 'Dashboard | User',
+  description: 'All Users '
+}
+
 
 const UserPage = async () => {
 

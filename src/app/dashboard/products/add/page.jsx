@@ -1,6 +1,11 @@
 import { addProduct } from "@/lib/actions/product"
 import styles from "./page.module.css"
 
+export const metadata = {
+    title: 'Dashboard | Add New Product',
+    description: 'All New Product'
+}
+
 const AddProductPage = () => {
     return (
         <div className={styles.container}>

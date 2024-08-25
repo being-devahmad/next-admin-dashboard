@@ -4,6 +4,11 @@ import styles from './page.module.css'
 import { fetchProducts } from "@/lib/utils/products"
 import { deleteProduct } from "@/lib/actions/product"
 
+export const metadata = {
+  title: 'Dashboard | Products',
+  description: 'All Products'
+}
+
 const ProductPage = async () => {
   const products = await fetchProducts()
   return (

@@ -1,6 +1,12 @@
 import { createUser } from '@/lib/actions/user'
 import styles from './page.module.css'
 
+export const metadata = {
+    title: 'Dashboard | Create New User',
+    description: 'All New User'
+}
+
+
 const AddUserPage = () => {
     return (
         <div className={styles.container}>

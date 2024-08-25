@@ -3,6 +3,55 @@ import styles from './page.module.css'
 import Image from 'next/image'
 import { updateUser } from '@/lib/actions/user'
 
+
+export async function generateMetadata({ params }) {
+    const id = params.id;
+    let user;
+
+    try {
+        user = await fetchUser(id);
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return {
+            title: "User not found",
+            openGraph: {
+                title: "User not found",
+                description: "The user you are looking for does not exist.",
+                url: `https://localhost:3000/dashboard/users/${id}`,  
+                images: [
+                    {
+                        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwRPWpO-12m19irKlg8znjldmcZs5PO97B6A&s', 
+                        width: 800,
+                        height: 600,
+                        alt: 'Default image'
+                    }
+                ],
+            },
+        };
+    }
+
+    return {
+        title: user.username,
+        description: `Profile page for ${user.username}`,
+        openGraph: {
+            title: user.username,
+            description: `View the profile of ${user.username}.`,
+            url: `https://localhost:3000/dashboard/users/${id}`,  
+            images: [
+                {
+                    url: user.img,  
+                    width: 800,
+                    height: 600,
+                    alt: `${user.username}'s profile picture`
+                }
+            ],
+        },
+    };
+}
+
+
+
+
 const SingleUserPage = async ({ params }) => {
 
     const { id } = params
@@ -39,7 +88,7 @@ const SingleUserPage = async ({ params }) => {
                     <label>Is Active</label>
                     <select name="isActive" id="isActive">
                         <option value={true} selected={user.isActive}>Yes</option>
-                        <option value={false} selected={! user.isActive}>No</option>
+                        <option value={false} selected={!user.isActive}>No</option>
                     </select>
                     <button type="submit">Update</button>
                 </form>

@@ -1,5 +1,10 @@
 import styles from './page.module.css'
 
+export const metadata = {
+    title: 'login',
+    description: 'Welcome to login page'
+}
+
 const LoginPage = () => {
     return (
         <div className={styles.container}>
